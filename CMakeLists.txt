@@ -206,3 +206,11 @@ endif ()
 
 # Output some config for CI (like our PRODUCT_NAME)
 include(GitHubENV)
+
+if (APPLE)
+    # Use our new full-bleed custom icns for the Standalone app
+    # This overrides the auto-generated one from juceaide
+    target_sources("${PROJECT_NAME}_Standalone" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/packaging/Icon.icns")
+    set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/packaging/Icon.icns" PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+    set_target_properties("${PROJECT_NAME}_Standalone" PROPERTIES MACOSX_BUNDLE_ICON_FILE "Icon.icns")
+endif()
