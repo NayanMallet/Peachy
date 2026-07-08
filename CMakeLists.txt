@@ -17,7 +17,7 @@ include(JUCEDefaults)
 # This is the internal name of the project and the name of JUCE's shared code target
 # Note: This cannot have spaces (it may be 2024, but you can't have it all!)
 # Worry not, JUCE's PRODUCT_NAME can have spaces (and is what DAWs display)
-set(PROJECT_NAME "Pamplejuce")
+set(PROJECT_NAME "Peachy")
 
 # Worry not, JUCE's PRODUCT_NAME can have spaces (and is what DAWs will display)
 # You can also just have it be the same thing as PROJECT_NAME
@@ -25,13 +25,13 @@ set(PROJECT_NAME "Pamplejuce")
 #   set(PROJECT_NAME "MyPlugin_v${MAJOR_VERSION}")
 # Doing so enables major versions to show up in IDEs and DAWs as separate plugins
 # allowing you to change parameters and behavior without breaking existing user projects
-set(PRODUCT_NAME "Pamplejuce Demo")
+set(PRODUCT_NAME "Peachy")
 
 # Change me! Used for the MacOS bundle name and Installers
-set(COMPANY_NAME "Pamplejuce Company")
+set(COMPANY_NAME "Nayan")
 
 # Change me! Used for the MacOS bundle identifier (and signing)
-set(BUNDLE_ID "com.pamplejuce.pamplejuce")
+set(BUNDLE_ID "com.nayan.peachy")
 
 # Change me! Set the plugin formats you want built
 # Valid choices: AAX Unity VST VST3 AU AUv3 Standalone
@@ -63,6 +63,12 @@ add_subdirectory(modules/clap-juce-extensions EXCLUDE_FROM_ALL)
 # This adds the melatonin inspector module
 add_subdirectory (modules/melatonin_inspector)
 
+# melatonin_blur (MIT): fast, cached drop/inner shadows and glows used by
+# PeachyLookAndFeel. Added as a git submodule (like melatonin_inspector) because
+# JUCE's juce_add_module requires the module folder basename to match its header
+# name — which CPM's "<name>-src" checkout dir would break.
+add_subdirectory (modules/melatonin_blur)
+
 # See `docs/CMake API.md` in the JUCE repo for all config options
 juce_add_plugin("${PROJECT_NAME}"
     # Icons for the standalone app
@@ -78,12 +84,12 @@ juce_add_plugin("${PROJECT_NAME}"
     # Change me!
     # A four-character plugin id
     # First character MUST be uppercase for AU formats
-    PLUGIN_MANUFACTURER_CODE Pamp
+    PLUGIN_MANUFACTURER_CODE Nayn
 
     # Change me!
     # A unique four-character plugin id
     # Note: this must have at least one upper-case character
-    PLUGIN_CODE P001
+    PLUGIN_CODE Pchy
     FORMATS "${FORMATS}"
 
     # The name of your final executable
@@ -112,7 +118,12 @@ include(SharedCodeDefaults)
 file(GLOB_RECURSE SourceFiles CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/source/*.h")
 target_sources(SharedCode INTERFACE ${SourceFiles})
 
-# Adds a BinaryData target for embedding assets into the binary
+# Adds a BinaryData target for embedding assets into the binary.
+# Custom fonts for PeachyLookAndFeel live in assets/Fonts/ (Righteous-Regular.ttf,
+# ShareTechMono-Regular.ttf, Oswald-Regular.ttf) and get picked up automatically by
+# the recursive glob below — no extra wiring needed here. Symbol names follow JUCE's
+# BinaryData convention (hyphens dropped, '.' becomes '_'), e.g.
+# BinaryData::RighteousRegular_ttf / BinaryData::RighteousRegular_ttfSize.
 include(Assets)
 
 # MacOS only: Cleans up folder and target organization on Xcode.
@@ -135,7 +146,7 @@ target_compile_definitions(SharedCode
     VERSION="${CURRENT_VERSION}"
 
     # JucePlugin_Name is for some reason doesn't use the nicer PRODUCT_NAME
-    PRODUCT_NAME_WITHOUT_VERSION="Pamplejuce"
+    PRODUCT_NAME_WITHOUT_VERSION="Peachy"
 )
 
 # Link to any other modules you added (with juce_add_module) here!
@@ -147,6 +158,7 @@ target_link_libraries(SharedCode
     INTERFACE
     Assets
     melatonin_inspector
+    melatonin_blur
     juce_audio_utils
     juce_audio_processors
     juce_dsp
@@ -162,11 +174,32 @@ target_link_libraries("${PROJECT_NAME}" PRIVATE SharedCode)
 # IPP support, comment out to disable
 include(PamplejuceIPP)
 
+# Run Catch test discovery at test time (PRE_TEST) rather than at build time.
+# On Apple Silicon an unsigned executable is killed by the kernel before it can
+# run, so POST_BUILD discovery would try to exec the binary before our ad-hoc
+# codesign step (below) had a chance to sign it. PRE_TEST defers discovery until
+# `ctest` runs, by which point the POST_BUILD signing has already happened.
+# Must be set before including the test/benchmark modules.
+set(CMAKE_CATCH_DISCOVER_TESTS_DISCOVERY_MODE "PRE_TEST" CACHE STRING "" FORCE)
+
 # Everything related to the tests target
 include(Tests)
 
 # A separate target for Benchmarks (keeps the Tests target fast)
 include(Benchmarks)
+
+# On Apple Silicon, unsigned executables are SIGKILL'd before they can run, which
+# breaks `ctest` test discovery. Ad-hoc sign the test binaries right after build.
+# Kept here (parent repo) rather than in the third-party `cmake/` submodule so a
+# fresh clone reproduces it without local submodule edits.
+if (APPLE)
+    add_custom_command(TARGET Tests POST_BUILD
+        COMMAND codesign --force -s - "$<TARGET_FILE:Tests>"
+        COMMENT "Ad-hoc code signing Tests so it can run for test discovery")
+    add_custom_command(TARGET Benchmarks POST_BUILD
+        COMMAND codesign --force -s - "$<TARGET_FILE:Benchmarks>"
+        COMMENT "Ad-hoc code signing Benchmarks so it can run for test discovery")
+endif ()
 
 # Output some config for CI (like our PRODUCT_NAME)
 include(GitHubENV)
