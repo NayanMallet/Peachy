@@ -208,9 +208,14 @@ endif ()
 include(GitHubENV)
 
 if (APPLE)
-    # Use our new full-bleed custom icns for the Standalone app
-    # This overrides the auto-generated one from juceaide
-    target_sources("${PROJECT_NAME}_Standalone" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/packaging/Icon.icns")
-    set_source_files_properties("${CMAKE_CURRENT_SOURCE_DIR}/packaging/Icon.icns" PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
-    set_target_properties("${PROJECT_NAME}_Standalone" PROPERTIES MACOSX_BUNDLE_ICON_FILE "Icon.icns")
+    # JUCE's juceaide auto-generates AppIcon.icns (with alpha channel) from
+    # ICON_BIG and hardcodes CFBundleIconFile=AppIcon.icns in the Info.plist.
+    # That alpha causes macOS to render a white background behind the squircle.
+    # We overwrite AppIcon.icns POST_BUILD with our full-bleed, alpha-free icns
+    # so the Dock icon fills the squircle cleanly.
+    add_custom_command(TARGET "${PROJECT_NAME}_Standalone" POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different
+            "${CMAKE_CURRENT_SOURCE_DIR}/packaging/Icon.icns"
+            "$<TARGET_BUNDLE_DIR:${PROJECT_NAME}_Standalone>/Contents/Resources/AppIcon.icns"
+        COMMENT "Overwriting JUCE AppIcon.icns with full-bleed custom icon")
 endif()
