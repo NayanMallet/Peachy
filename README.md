@@ -1,57 +1,139 @@
-![PAMPLEJUCE](assets/images/pamplejuce.png)
-[![](https://github.com/sudara/pamplejuce/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/sudara/pamplejuce/actions)
+<div align="center">
 
-Pamplejuce is a ~~template~~ lifestyle for creating and building JUCE plugins in 2026.
+<img src="assets/logo.png" alt="Peachy Logo" width="420"/>
 
-Out-of-the-box, it:
+<h1 style="color:#ff9e6d; letter-spacing:3px;">🍑 PEACHY</h1>
 
-1. Runs C++23
-2. Uses JUCE 8.x as a git submodule (tracking develop).
-3. Uses CPM for dependency management.
-3. Relies on CMake 3.25 and higher for cross-platform building.
-4. Has [Catch2](https://github.com/catchorg/Catch2) v3.7.1 for the test framework and runner.
-5. Includes a `Tests` target and a `Benchmarks` target with examples to get started quickly.
-6. Has [Melatonin Inspector](https://github.com/sudara/melatonin_inspector) installed as a JUCE module to help relieve headaches when building plugin UI.
+### <span style="color:#ff7e5f;">The vocal processor that sounds like hardware, not homework.</span>
 
-It also has integration with GitHub Actions, specifically:
+*Real-time pitch &amp; formant shifting · hard-tune · robot · analog-style tube drive.*
 
-1. Building and testing cross-platform (linux, macOS, Windows) binaries
-2. Running tests and benchmarks in CI
-3. Running [pluginval](http://github.com/tracktion/pluginval) 1.x against the binaries for plugin validation
-4. Config for [installing Intel IPP](https://www.intel.com/content/www/us/en/developer/tools/oneapi/ipp.html)
-5. [Code signing and notarization on macOS](https://melatonin.dev/blog/how-to-code-sign-and-notarize-macos-audio-plugins-in-ci/)
-6. [Windows code signing via Azure Trusted Signing](https://melatonin.dev/blog/code-signing-on-windows-with-azure-trusted-signing/)
+<br/>
 
-It also contains:
+[![Build & Test](https://img.shields.io/badge/build-passing-ff9e6d?style=for-the-badge)](../../actions)
+[![Tests](https://img.shields.io/badge/tests-12%2F12-ff7e5f?style=for-the-badge)](tests/)
+[![Platform](https://img.shields.io/badge/mac%20·%20win%20·%20linux-1d1e22?style=for-the-badge)](#-installation)
+[![Formats](https://img.shields.io/badge/VST3%20·%20AU%20·%20CLAP%20·%20Standalone-1d1e22?style=for-the-badge)](#-installation)
+[![License](https://img.shields.io/badge/license-see%20LICENSE-a06b4a?style=for-the-badge)](LICENSE)
 
-1. A `.gitignore` for all platforms.
-2. A `.clang-format` file for keeping code tidy.
-3. A `VERSION` file that will propagate through JUCE and your app.
-4. A ton of useful comments and options around the CMake config.
+<br/>
 
-## How does this all work at a high level?
+<img src="assets/manual_overview.png" alt="Peachy interface" width="720"/>
 
-Check out the [official Pamplejuce documentation](https://melatonin.dev/manuals/pamplejuce/how-does-this-all-work/).
+</div>
 
-[![Arc - 2024-10-01 51@2x](https://github.com/user-attachments/assets/01d19d2d-fbac-481f-8cec-e9325b2abe57)](https://melatonin.dev/manuals/pamplejuce/how-does-this-all-work/)
+---
 
-## Setting up for YOUR project
+## 🎤 What is Peachy?
 
-This is a template repo!
+**Peachy** is a monophonic, real-time vocal processor built with [JUCE](https://juce.com).
+It shifts pitch and formants **independently**, hard-tunes, robotises, and colours
+the result with a warm tube drive — all from one skeuomorphic front panel.
 
-That means you can click "[Use this template](https://github.com/sudara/pamplejuce/generate)" here or at the top of the page to get your own copy (not fork) of the repo. Then you can make it private or keep it public, up to you.
+It is **not** a generic time-stretcher. Peachy's engine is **TD-PSOLA**
+(Time-Domain Pitch-Synchronous Overlap-Add), locked to a real-time pitch tracker,
+so it stays smooth and phase-coherent where phase-vocoder tools smear. At neutral
+settings it's mathematically transparent; pushed, it becomes an instrument.
 
-Then check out the [documentation](https://melatonin.dev/manuals/pamplejuce/setting-your-project-up/) so you know what to tweak.
+---
 
-**Using an AI coding agent?** The included `CLAUDE.md` / `AGENTS.md` has a first-time setup wizard — just ask your agent to set up the project and it will walk you through naming, CI configuration, and code signing.
+## ✨ Features
 
-> [!NOTE]
-> Tests will immediately run and fail (go red) until you [set up code signing](https://melatonin.dev/manuals/pamplejuce/getting-started/code-signing/).
+- 🎚️ **Real-time TD-PSOLA engine** — pitch-synchronous, phase-locked, *transparent at unity* (verified to ~4 × 10⁻⁸ error).
+- 🗣️ **Independent pitch &amp; formant** — change the note without the character, or the character without the note.
+- 🎯 **Three modes** — **Transpose** (clean shift), **Quantize** (instant hard-tune), **Robot** (locked machine voice).
+- 🔥 **Asymmetric Tube Drive** — analog-modelled triode saturation with dynamic bias, 4× oversampling and automatic RMS make-up gain.
+- 🎛️ **Skeuomorphic UI** — knurled metal knobs, neon indicators, an amber LCD with `<` `>` preset stepping and a random **dice**.
+- 🔗 **Bidirectional Link** — tie formant to pitch for chipmunk / monster effects.
+- 💾 **20 factory presets** + editable value fields + full DAW automation.
+- 🖥️ **Cross-platform** — macOS (Intel &amp; Apple Silicon), Windows, Linux.
 
-## Having Issues?
+---
 
-Thanks to everyone who has contributed to the repository. 
+## 📦 Installation
 
-This repository covers a _lot_ of ground. JUCE itself has a lot of surface area. It's a group effort to maintain the garden and keep things nice!
+Grab the latest build from the [**Releases**](../../releases) page and drop it in
+your plugin folder:
 
-If something isn't just working out of the box — *it's probably not just you* — others are running into the problem, too, I promise. Check out [the official docs](https://melatonin.dev/manuals/pamplejuce), then please do [open an issue](https://github.com/sudara/pamplejuce/issues/new)!
+| Format | macOS | Windows |
+|---|---|---|
+| **VST3** | `~/Library/Audio/Plug-Ins/VST3/` | `C:\Program Files\Common Files\VST3\` |
+| **AU** | `~/Library/Audio/Plug-Ins/Components/` | — |
+| **CLAP** | `~/Library/Audio/Plug-Ins/CLAP/` | `C:\Program Files\Common Files\CLAP\` |
+| **Standalone** | copy the `.app` anywhere | copy the `.exe` anywhere |
+
+Rescan plugins in your DAW and load **Peachy** on a **mono lead vocal** track.
+📖 See the [**User Manual**](docs/MANUAL.md) to get the best out of it.
+
+---
+
+## 🛠️ Build from Source
+
+Peachy builds with **CMake** and **C++23**. JUCE and the other dependencies are
+git submodules — clone recursively.
+
+```bash
+# 1. Clone with all submodules (JUCE, CLAP, melatonin_blur, ...)
+git clone --recursive https://github.com/NayanMallet/Peachy.git
+cd Peachy
+
+# ...or, if you already cloned without --recursive:
+git submodule update --init --recursive
+
+# 2. Configure (Ninja recommended)
+cmake -B Builds -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+# 3. Build
+cmake --build Builds --config Release
+
+# 4. Run the tests
+ctest --test-dir Builds --output-on-failure
+```
+
+**Universal binary (macOS):** add `-DCMAKE_OSX_ARCHITECTURES="arm64;x86_64"` at
+configure time.
+
+Build artifacts land in `Builds/Peachy_artefacts/`.
+
+<details>
+<summary><strong>Dependencies (all vendored as submodules)</strong></summary>
+
+- [JUCE](https://github.com/juce-framework/JUCE) — framework
+- [clap-juce-extensions](https://github.com/free-audio/clap-juce-extensions) — CLAP format
+- [melatonin_blur](https://github.com/sudara/melatonin_blur) — drop shadows &amp; glows
+- [melatonin_inspector](https://github.com/sudara/melatonin_inspector) — UI debugging
+- Catch2 (fetched via CPM) — tests
+
+</details>
+
+---
+
+## 🗺️ Project Layout
+
+```
+source/
+├── PluginProcessor.{h,cpp}   APVTS, presets, DSP chain
+├── PluginEditor.{h,cpp}      3-panel UI, clickable LCD, bidirectional Link
+├── PeachyLookAndFeel.h       palette, custom fonts, knobs, halos, LCD menus
+└── dsp/
+    ├── PitchDetector.*        YIN fundamental tracking
+    ├── PitchFormantEngine.*   TD-PSOLA pitch/formant shifter
+    └── TubeSaturator.*        Decapitator-style tube drive
+docs/     MANUAL.md · ROADMAP.md
+tests/    Catch2 unit + DSP + snapshot tests
+```
+
+The 3-month evolution plan (MIDI/vocoder control, scale-aware quantize, user
+presets, resizable UI) lives in [`docs/ROADMAP.md`](docs/ROADMAP.md).
+
+---
+
+<div align="center">
+
+### 🍑 <span style="color:#ff9e6d;">Peachy Audio</span>
+
+*Derived from the [Pamplejuce](https://github.com/sudara/pamplejuce) template · Built with JUCE.*
+
+<sub style="color:#5c5e65;">“It's peachy.”</sub>
+
+</div>

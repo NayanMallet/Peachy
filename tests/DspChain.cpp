@@ -150,6 +150,30 @@ TEST_CASE ("PSOLA engine is transparent at unity", "[dsp]")
     CHECK (relativeError < 0.05);
 }
 
+// Automation lanes read the parameter's own text function: at most 2 decimals,
+// no superfluous trailing zeros, with the unit — and never the "20.00 -> 2" trap.
+TEST_CASE ("Parameter automation strings are clean", "[params]")
+{
+    PluginProcessor processor;
+
+    auto textFor = [&] (const char* id, float value)
+    {
+        // Call through RangedAudioParameter* (getText is public there; it's the
+        // AudioParameterFloat override that's private)
+        auto* p = processor.apvts.getParameter (id);
+        REQUIRE (p != nullptr);
+        return p->getText (p->convertTo0to1 (value), 32);
+    };
+
+    CHECK (textFor (ParamIDs::pitch, 2.3f) == "2.3 st");
+    CHECK (textFor (ParamIDs::pitch, -5.0f) == "-5 st");
+    CHECK (textFor (ParamIDs::pitch, 0.0f) == "0 st");
+    CHECK (textFor (ParamIDs::formant, 12.0f) == "12 st");
+    CHECK (textFor (ParamIDs::drive, 20.0f) == "20 %");   // the trailing-zero trap
+    CHECK (textFor (ParamIDs::mix, 100.0f) == "100 %");
+    CHECK (textFor (ParamIDs::mix, 47.5f) == "47.5 %");
+}
+
 namespace
 {
     // Runs a sine through the full chain and returns the steady-state tail RMS

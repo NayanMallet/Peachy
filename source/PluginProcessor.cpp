@@ -372,30 +372,60 @@ juce::AudioProcessorValueTreeState::ParameterLayout PluginProcessor::createParam
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
 
+    // Host automation lanes and generic editors read the parameter's own
+    // string function. Format floats with at most 2 decimals, trimming only the
+    // fractional zeros (so 2.30 -> "2.3", 45.00 -> "45", never 20.00 -> "2"),
+    // followed by the unit. valueFromString parses the leading number back.
+    auto stringFromValue = [] (const juce::String& unit)
+    {
+        return [unit] (float value, int) -> juce::String
+        {
+            juce::String text (value, 2);
+
+            if (text.containsChar ('.'))
+                text = text.trimCharactersAtEnd ("0").trimCharactersAtEnd (".");
+
+            return unit.isEmpty() ? text : text + " " + unit;
+        };
+    };
+    auto valueFromString = [] (const juce::String& text) { return text.getFloatValue(); };
+
+    auto floatAttributes = [&] (const juce::String& unit)
+    {
+        return juce::AudioParameterFloatAttributes()
+            .withLabel (unit)
+            .withStringFromValueFunction (stringFromValue (unit))
+            .withValueFromStringFunction (valueFromString);
+    };
+
     // 0.1 step: one decimal place is precise enough and much nicer to dial in
     params.push_back (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { ParamIDs::pitch, 1 },
         "Pitch",
         juce::NormalisableRange<float> (-12.0f, 12.0f, 0.1f),
-        0.0f));
+        0.0f,
+        floatAttributes ("st")));
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { ParamIDs::formant, 1 },
         "Formant",
         juce::NormalisableRange<float> (-12.0f, 12.0f, 0.1f),
-        0.0f));
+        0.0f,
+        floatAttributes ("st")));
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { ParamIDs::drive, 1 },
         "Drive",
         juce::NormalisableRange<float> (0.0f, 100.0f),
-        0.0f));
+        0.0f,
+        floatAttributes ("%")));
 
     params.push_back (std::make_unique<juce::AudioParameterFloat> (
         juce::ParameterID { ParamIDs::mix, 1 },
         "Mix",
         juce::NormalisableRange<float> (0.0f, 100.0f),
-        100.0f));
+        100.0f,
+        floatAttributes ("%")));
 
     params.push_back (std::make_unique<juce::AudioParameterChoice> (
         juce::ParameterID { ParamIDs::mode, 1 },

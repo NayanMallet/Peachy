@@ -1,111 +1,200 @@
-# Peachy — Manuel utilisateur
+<div align="center">
 
-*Vocal Processor · VST3 / AU / CLAP / Standalone*
+<img src="assets/logo.png" alt="Peachy" width="360"/>
 
----
+<h1 style="color:#ff9e6d; letter-spacing:2px; margin-bottom:0;">PEACHY</h1>
+<p style="color:#ff7e5f; font-size:18px; margin-top:4px;"><strong>Vocal Processor — User Manual</strong></p>
 
-## Bienvenue
+<sub>Pitch · Formant · Hard-Tune · Robot · Tube Drive</sub>
 
-Peachy est un processeur vocal monophonique temps réel : pitch shifting, formant
-shifting, hard-tune, voix robot et saturation à lampe, dans une seule façade.
-Il descend en droite ligne des boîtes hardware de studio — un moteur temporel
-synchronisé sur la hauteur de la voix, pas un time-stretch générique. C'est ce
-qui lui donne son grain lisse et « analogique » : à réglages neutres, Peachy est
-transparent ; poussé, il devient un instrument.
-
-**La règle d'or** (elle vaut pour tous les processeurs de cette famille) :
-Peachy est conçu pour **une seule voix, propre et sèche**. Pas d'accords, pas de
-chœurs, pas de réverbe en entrée. Placez-le premier dans la chaîne d'insert,
-avant compression lourde et effets d'espace.
-
-## Tour de la façade
-
-### PITCH (−12 à +12 demi-tons)
-Transpose la voix. Grâce à la préservation des formants, un shift d'une octave
-change la *note*, pas le *personnage* : le timbre du chanteur reste en place.
-- ±2-3 st : harmonies discrètes, doublures.
-- +12 / −12 : octaves parallèles (utilisez MIX ~40-50 %).
-- En mode ROBOT, PITCH devient l'offset de la note cible.
-
-### FORMANT (−12 à +12 demi-tons)
-Déplace l'enveloppe spectrale — la « taille » du conduit vocal — sans toucher à
-la note. C'est le réglage le plus magique de la façade :
-- +2 à +4 : plus jeune, plus léger, plus « féminin ».
-- −2 à −4 : plus large, plus sombre, plus « masculin ».
-- Extrêmes : dessin animé ou géant de film fantastique.
-
-### LINK
-Verrouille FORMANT sur PITCH (et réciproquement — le lien est bidirectionnel).
-Utilisez-le pour les effets « bande accélérée » (chipmunk/monstre), où pitch et
-timbre doivent bouger ensemble. Laissez-le éteint pour tout le reste : c'est la
-séparation pitch/formant qui fait sonner naturel.
-
-### MODE
-- **TRANSPOSE** — le shifter pur : PITCH et FORMANT contrôlent directement le
-  moteur. Le mode « musical » par défaut.
-- **QUANTIZE** — hard-tune : chaque note chantée est aimantée au demi-ton le
-  plus proche, quasi instantanément. L'effet pop/hip-hop signature. PITCH ajoute
-  un offset après la correction (ex : +12 pour un hard-tune à l'octave).
-- **ROBOT** — écrase la mélodie : la voix est verrouillée sur une hauteur fixe
-  (Do central + PITCH). Le vibrato disparaît, la diction reste — la voix machine
-  classique.
-
-### DRIVE (0 à 100 %)
-Saturation à lampe, héritée des étages triode : asymétrique, réactive à
-l'enveloppe de la voix (le bias « respire » avec le chant), avec un tilt
-hauts-médiums qui la rend agressive et chaude à la fois. Le gain de sortie est
-compensé automatiquement : montez le drive, le niveau perçu ne bouge pas, seule
-la densité harmonique monte. À 100 %, c'est sale — volontairement.
-
-### MIX (0 à 100 %)
-Balance traité/direct, compensée en latence (pas de filtrage en peigne).
-- 100 % : l'effet remplace la voix (hard-tune, robot).
-- 30-50 % : doublures, octaves, saturation parallèle.
-
-### L'écran LCD
-- La ligne du haut affiche le **preset**, la ligne du bas le **mode** actif.
-- Cliquez sur le texte pour ouvrir la **liste des presets**.
-- `<` / `>` : preset précédent / suivant.
-- **Le dé** : lance des valeurs aléatoires *musicales* (pitch ±7, formant ±4,
-  drive ≤60, mix ≥40). Inspiration instantanée, sans jamais rien casser.
-- Les valeurs sous les potards sont éditables : double-clic, tapez, Entrée.
-
-## Les presets d'usine
-
-| Groupe | Presets | Usage |
-|---|---|---|
-| Utilitaires | Init (Flat), Tube Warmth, Parallel Crush | neutre / chaleur / NY-style |
-| Caractère | Chest & Body, Bright & Young, Gender Flip Fem/Masc | timbre sans changer la note |
-| Harmonies | Octave Stack, Sub Octave, Fifth Harmony, Natural Double | couches sous le lead |
-| Hard-tune | Clean Auto-Tune, Trap Ad-Lib, Drill Grit, Pop Tune Sheen | du propre au crade |
-| Robot | Classic Robot, Deep Machine, High Droid | voix machine |
-| FX | Chipmunk, Monster | pitch+formant liés |
-
-## Recettes rapides
-
-**Hard-tune moderne** — QUANTIZE, mix 100 %, drive 10-20 %. Chantez legato en
-visant les notes : l'aimantation fait le reste. Trop d'effet ? C'est le but.
-
-**Doublure naturelle** — TRANSPOSE, pitch +0.2, formant −0.8, mix ~45 %.
-Dupliquez la piste et panoramiquez pour un double stéréo.
-
-**Radio / téléphone méchant** — formant −3, drive 40 %, mix 100 %.
-
-**Robot de fin de morceau** — ROBOT, pitch −5, drive 30 %. Automatisez MIX pour
-faire entrer la machine progressivement.
-
-## Notes techniques
-
-- **Latence** : ~50 ms (compensée automatiquement par votre DAW). En prise de
-  voix en direct, utilisez le monitoring direct de votre interface.
-- **Entrée** : mono ou stéréo ; le traitement est monophonique par conception,
-  la sortie est identique sur les deux canaux (phase parfaitement solide).
-- **Plage de détection** : 60 Hz à 1 kHz — de la basse profonde au soprano.
-- **Signal idéal** : voix seule, sèche, sans bruit de fond lourd. Les consonnes
-  et les respirations passent intactes (elles ne sont jamais transposées).
-- **Formats** : VST3, AU, AUv3, CLAP, Standalone · macOS (Intel/Apple Silicon),
-  Windows, Linux · 44.1 à 192 kHz.
+</div>
 
 ---
 
-*Peachy Audio · « It's peachy. »*
+<h2 style="color:#ff9e6d;">🍑 The Basics</h2>
+
+![Peachy — full interface](assets/manual_overview.png)
+
+Peachy is a **monophonic, real-time vocal processor**. It shifts pitch and formants
+independently, hard-tunes, robotises, and runs the whole thing through a warm
+tube-style drive — from a single, obvious front panel.
+
+Under the hood it is *not* a generic time-stretcher. Peachy uses a **TD-PSOLA**
+engine (Time-Domain Pitch-Synchronous Overlap-Add) locked to the pitch detected in
+real time. That is what gives it a smooth, analog-leaning grain instead of the
+smeared, granular artifacts you get from phase-vocoder tools. At neutral settings
+Peachy is *mathematically transparent* — it hands your voice straight back.
+
+> <strong style="color:#ff9e6d;">The golden rule.</strong> Peachy is built for
+> <strong>one clean, dry, monophonic voice</strong> — the same discipline the classic
+> hardware pitch boxes demanded. No chords, no stacked harmonies, no reverb on the
+> way in. Put Peachy <strong>first in the insert chain</strong>, before compression
+> and before any time-based effects.
+
+<table>
+<tr><td style="background:#1d1e22; color:#ff9e6d; padding:10px 14px;">
+<strong>Do</strong> — solo lead vocal · dry &amp; close-mic'd · clean/gated before Peachy
+</td></tr>
+<tr><td style="background:#1d1e22; color:#a06b4a; padding:10px 14px;">
+<strong>Avoid</strong> — polyphonic material · heavy room / reverb · noisy backgrounds
+</td></tr>
+</table>
+
+---
+
+<h2 style="color:#ff9e6d;">🎛 Control Panel</h2>
+
+Peachy's panel splits into three sections — **Pitch &amp; Formant** (left),
+**Mode** (centre) and **Color &amp; Output** (right) — with a clickable LCD in the
+header for presets.
+
+<br/>
+
+<h3 style="color:#ff7e5f;">PITCH &amp; FORMANT</h3>
+
+![Pitch & Formant knobs](assets/manual_pitch_formant.png)
+
+**PITCH** &nbsp;·&nbsp; `−12 … +12 semitones`
+Transposes the voice. Because formants are preserved, shifting an octave changes
+the *note*, not the *character* — the singer still sounds like themselves.
+
+- `±2–3 st` — subtle harmonies and thickening
+- `+12 / −12` — parallel octaves (drop **MIX** to ~40–50 %)
+- In **ROBOT** mode, PITCH becomes the offset of the locked target note.
+
+**FORMANT** &nbsp;·&nbsp; `−12 … +12 semitones`
+Moves the spectral envelope — the perceived *size* of the voice — **without**
+changing the note. The most musical control on the panel:
+
+- `+2 … +4` — younger, lighter, brighter
+- `−2 … −4` — bigger, darker, chestier
+- extremes — cartoon chipmunk or movie-monster
+
+<br/>
+
+<h3 style="color:#ff7e5f;">LINK</h3>
+
+![Link toggle](assets/manual_link.png)
+
+**LINK** ties FORMANT to PITCH (and back — the link is **bidirectional**). Turn it
+on for "sped-up tape" effects, where pitch and timbre must move together
+(chipmunk / monster). Leave it **off** for everything else — the whole point of
+Peachy is that pitch and formant stay independent.
+
+<br/>
+
+<h3 style="color:#ff7e5f;">MODE</h3>
+
+![Mode buttons](assets/manual_mode.png)
+
+<table>
+<tr>
+  <td style="background:#1d1e22; color:#ff9e6d; padding:10px 14px; white-space:nowrap;"><strong>TRANSPOSE</strong></td>
+  <td style="background:#1d1e22; color:#c9cbd1; padding:10px 14px;">The pure shifter. PITCH and FORMANT drive the engine directly. The default, "musical" mode.</td>
+</tr>
+<tr>
+  <td style="background:#1d1e22; color:#ff9e6d; padding:10px 14px; white-space:nowrap;"><strong>QUANTIZE</strong></td>
+  <td style="background:#1d1e22; color:#c9cbd1; padding:10px 14px;">Hard-tune. Every sung note snaps to the nearest semitone, almost instantly — the pop / hip-hop signature. PITCH adds an offset <em>after</em> correction (e.g. +12 for octave hard-tune).</td>
+</tr>
+<tr>
+  <td style="background:#1d1e22; color:#ff9e6d; padding:10px 14px; white-space:nowrap;"><strong>ROBOT</strong></td>
+  <td style="background:#1d1e22; color:#c9cbd1; padding:10px 14px;">Kills the melody. The voice is locked to one fixed pitch (C3 + PITCH). Vibrato disappears, diction stays — the classic machine voice.</td>
+</tr>
+</table>
+
+<br/>
+
+<h3 style="color:#ff7e5f;">DRIVE</h3>
+
+![Drive knob](assets/manual_drive.png)
+
+**DRIVE** &nbsp;·&nbsp; `0 … 100 %`
+Tube-style saturation, modelled after driven triode input stages: asymmetric,
+envelope-reactive (the bias *breathes* with the vocal), with an upper-mid tilt
+that keeps it aggressive and warm at once. Output level is **auto-compensated** —
+push the drive and the perceived loudness stays put while harmonic density climbs.
+At 100 % it is filthy, on purpose.
+
+<br/>
+
+<h3 style="color:#ff7e5f;">MIX</h3>
+
+![Mix knob](assets/manual_mix.png)
+
+**MIX** &nbsp;·&nbsp; `0 … 100 %`
+Wet/dry balance, **latency-compensated** (no comb filtering).
+
+- `100 %` — the effect replaces the voice (hard-tune, robot)
+- `30–50 %` — doublers, octaves, parallel saturation
+
+<br/>
+
+<h3 style="color:#ff7e5f;">The LCD &amp; Presets</h3>
+
+![Preset LCD](assets/manual_lcd.png)
+
+The header LCD shows the current **preset** (top line) and **mode** (bottom line).
+Click the text to open the preset list; use **`<`** / **`>`** to step through
+presets; hit the **dice** to roll fresh, musical random settings. Every value chip
+under a knob is editable — double-click, type, Enter.
+
+---
+
+<h2 style="color:#ff9e6d;">⚡ Quick Recipes</h2>
+
+<h3 style="color:#ff7e5f;">Modern Hard-Tune</h3>
+
+> <code style="color:#ffb98a;">MODE = QUANTIZE · MIX 100% · DRIVE 10–20% · PITCH 0</code>
+
+Sing legato, aim at the notes, and let the snapping do the work. Too much effect?
+That *is* the effect. Add a touch of DRIVE for edge.
+
+<h3 style="color:#ff7e5f;">Robot / Machine Voice</h3>
+
+> <code style="color:#ffb98a;">MODE = ROBOT · PITCH −5 … 0 · DRIVE 20–40% · MIX 100%</code>
+
+Locks the voice to one note. Automate **MIX** from 0 → 100 % to make the machine
+rise into a phrase. Lower PITCH for a deeper droid, raise it for a chirpy one.
+
+<h3 style="color:#ff7e5f;">Natural Doubler</h3>
+
+> <code style="color:#ffb98a;">MODE = TRANSPOSE · PITCH +0.2 · FORMANT −0.8 · MIX ~45%</code>
+
+A tiny detune against the dry signal creates a gentle, believable double.
+Duplicate the track and pan hard for a wide stereo double.
+
+<h3 style="color:#ff7e5f;">Gender / Character Shift</h3>
+
+> <code style="color:#ffb98a;">MODE = TRANSPOSE · PITCH ±3 · FORMANT ±3 · LINK off</code>
+
+Move PITCH and FORMANT together for a full, natural gender flip; move **only**
+FORMANT to change the *character* while keeping the melody intact.
+
+---
+
+<h2 style="color:#ff9e6d;">📋 Specs &amp; Support</h2>
+
+<table>
+<tr><td style="background:#1d1e22; color:#ff9e6d; padding:8px 14px;"><strong>Formats</strong></td>
+    <td style="background:#1d1e22; color:#c9cbd1; padding:8px 14px;">VST3 · AU · AUv3 · CLAP · Standalone</td></tr>
+<tr><td style="background:#1d1e22; color:#ff9e6d; padding:8px 14px;"><strong>Platforms</strong></td>
+    <td style="background:#1d1e22; color:#c9cbd1; padding:8px 14px;">macOS (Intel &amp; Apple Silicon) · Windows · Linux</td></tr>
+<tr><td style="background:#1d1e22; color:#ff9e6d; padding:8px 14px;"><strong>Sample rates</strong></td>
+    <td style="background:#1d1e22; color:#c9cbd1; padding:8px 14px;">44.1 – 192 kHz</td></tr>
+<tr><td style="background:#1d1e22; color:#ff9e6d; padding:8px 14px;"><strong>Latency</strong></td>
+    <td style="background:#1d1e22; color:#c9cbd1; padding:8px 14px;">~50 ms, reported to the host for automatic delay compensation</td></tr>
+<tr><td style="background:#1d1e22; color:#ff9e6d; padding:8px 14px;"><strong>Detection range</strong></td>
+    <td style="background:#1d1e22; color:#c9cbd1; padding:8px 14px;">60 Hz – 1 kHz (mono voice)</td></tr>
+<tr><td style="background:#1d1e22; color:#ff9e6d; padding:8px 14px;"><strong>Channels</strong></td>
+    <td style="background:#1d1e22; color:#c9cbd1; padding:8px 14px;">Mono or stereo in; processing is monophonic, output mirrored to both channels</td></tr>
+</table>
+
+**Live tracking?** Peachy's ~50 ms of look-ahead is normal for a formant-correct
+pitch engine. For live takes, monitor through your interface's direct path and let
+the DAW compensate on playback.
+
+<br/>
+
+<div align="center">
+<sub style="color:#5c5e65;">Peachy Audio · Built with JUCE · “It's peachy.”</sub>
+</div>
