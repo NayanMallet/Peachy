@@ -1,4 +1,4 @@
-<div align="center"><img src="assets/logotype.svg" width="400" alt="Peachy Logotype"></div>
+<div align="center"><img src="assets/logotype.png" width="2760" alt="Peachy Logotype"></div>
 
 <div align="center">
 
@@ -128,7 +128,7 @@ presets, resizable UI) lives in [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 <div align="center">
 
-<div align="center"><img src="assets/logotype.svg" width="400" alt="Peachy Logotype"></div>
+<div align="center"><img src="assets/logotype.png" width="400" alt="Peachy Logotype"></div>
 
 *Derived from the [Pamplejuce](https://github.com/sudara/pamplejuce) template · Built with JUCE.*
 

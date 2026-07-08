@@ -1,6 +1,6 @@
 <div align="center">
 
-<div align="center"><img src="assets/logotype.svg" width="400" alt="Peachy Logotype"></div>
+<div align="center"><img src="../assets/logotype.png" width="2760" alt="Peachy Logotype"></div>
 
 <p style="color:#ff7e5f; font-size:18px; margin-top:4px;"><strong>Vocal Processor — User Manual</strong></p>
 
