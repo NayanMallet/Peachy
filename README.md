@@ -14,6 +14,10 @@
 [![Formats](https://img.shields.io/badge/VST3%20·%20AU%20·%20CLAP%20·%20Standalone-1d1e22?style=for-the-badge)](#-installation)
 [![License](https://img.shields.io/badge/license-see%20LICENSE-a06b4a?style=for-the-badge)](LICENSE)
 
+<br/>
+
+<img src="assets/manual_overview.png" alt="Peachy interface" width="720"/>
+
 </div>
 
 ---

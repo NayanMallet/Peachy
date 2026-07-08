@@ -1,4 +1,3 @@
-
 <div align="center">
 
 <div align="center"><img src="assets/logotype.svg" width="400" alt="Peachy Logotype"></div>
@@ -106,7 +105,7 @@ Peachy is that pitch and formant stay independent.
 
 <h3 style="color:#ff7e5f;">DRIVE</h3>
 
-![Drive knob](../assets/manual_drive.png)
+![Drive knob](assets/manual_drive.png)
 
 **DRIVE** &nbsp;·&nbsp; `0 … 100 %`
 Tube-style saturation, modelled after driven triode input stages: asymmetric,
