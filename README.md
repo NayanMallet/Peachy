@@ -1,8 +1,6 @@
+<div align="center"><img src="assets/logotype.svg" width="400" alt="Peachy Logotype"></div>
+
 <div align="center">
-
-<img src="assets/logo.png" alt="Peachy Logo" width="420"/>
-
-<h1 style="color:#ff9e6d; letter-spacing:3px;">🍑 PEACHY</h1>
 
 ### <span style="color:#ff7e5f;">The vocal processor that sounds like hardware, not homework.</span>
 
@@ -11,14 +9,10 @@
 <br/>
 
 [![Build & Test](https://img.shields.io/badge/build-passing-ff9e6d?style=for-the-badge)](../../actions)
-[![Tests](https://img.shields.io/badge/tests-12%2F12-ff7e5f?style=for-the-badge)](tests/)
+[![Tests](https://img.shields.io/badge/tests-13%2F13-ff7e5f?style=for-the-badge)](tests/)
 [![Platform](https://img.shields.io/badge/mac%20·%20win%20·%20linux-1d1e22?style=for-the-badge)](#-installation)
 [![Formats](https://img.shields.io/badge/VST3%20·%20AU%20·%20CLAP%20·%20Standalone-1d1e22?style=for-the-badge)](#-installation)
 [![License](https://img.shields.io/badge/license-see%20LICENSE-a06b4a?style=for-the-badge)](LICENSE)
-
-<br/>
-
-<img src="assets/manual_overview.png" alt="Peachy interface" width="720"/>
 
 </div>
 
@@ -130,7 +124,7 @@ presets, resizable UI) lives in [`docs/ROADMAP.md`](docs/ROADMAP.md).
 
 <div align="center">
 
-### 🍑 <span style="color:#ff9e6d;">Peachy Audio</span>
+<div align="center"><img src="assets/logotype.svg" width="400" alt="Peachy Logotype"></div>
 
 *Derived from the [Pamplejuce](https://github.com/sudara/pamplejuce) template · Built with JUCE.*
 

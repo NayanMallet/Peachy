@@ -71,8 +71,11 @@ add_subdirectory (modules/melatonin_blur)
 
 # See `docs/CMake API.md` in the JUCE repo for all config options
 juce_add_plugin("${PROJECT_NAME}"
-    # Icons for the standalone app
-    ICON_BIG "${CMAKE_CURRENT_SOURCE_DIR}/packaging/icon.png"
+    # Standalone app + plugin bundle icon. JUCE (juceaide) bakes the native
+    # .icns/.ico from this PNG; a distribution-ready packaging/Icon.icns is also
+    # generated from the same source for the macOS installer/DMG.
+    ICON_BIG "${CMAKE_CURRENT_SOURCE_DIR}/assets/logo.png"
+    ICON_SMALL "${CMAKE_CURRENT_SOURCE_DIR}/assets/logo.png"
 
     # Change me!
     COMPANY_NAME "${COMPANY_NAME}"

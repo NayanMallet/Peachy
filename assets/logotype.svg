@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="svg-logotype" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 280" width="920" height="280" style="position: relative; width: 100%; height: auto; display: block;">
+    <defs>
+        <style>@import url('https://fonts.googleapis.com/css2?family=Righteous');</style>
+        <linearGradient id="lt-grad" x1="0" y1="0" x2="0.3" y2="1">
+            <stop offset="0" stop-color="#ffd3b0"></stop>
+            <stop offset="1" stop-color="#ff7e5f"></stop>
+        </linearGradient>
+        <filter id="lt-glow" x="-40%" y="-80%" width="180%" height="260%">
+            <feGaussianBlur stdDeviation="13" result="b"></feGaussianBlur>
+            <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+        </filter>
+    </defs>
+    <text x="460" y="188" text-anchor="middle" font-family="Righteous, sans-serif" font-size="168" fill="url(#lt-grad)" filter="url(#lt-glow)">Peachy</text>
+</svg>
