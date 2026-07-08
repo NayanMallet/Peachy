@@ -1,6 +1,6 @@
-<div align="center">
+![Peachy Banner](../assets/banner.svg)
 
-<img src="assets/logo.png" alt="Peachy" width="360"/>
+<div align="center">
 
 <h1 style="color:#ff9e6d; letter-spacing:2px; margin-bottom:0;">PEACHY</h1>
 <p style="color:#ff7e5f; font-size:18px; margin-top:4px;"><strong>Vocal Processor — User Manual</strong></p>
@@ -13,7 +13,7 @@
 
 <h2 style="color:#ff9e6d;">🍑 The Basics</h2>
 
-![Peachy — full interface](assets/manual_overview.png)
+![Peachy — full interface](../assets/manual_overview.png)
 
 Peachy is a **monophonic, real-time vocal processor**. It shifts pitch and formants
 independently, hard-tunes, robotises, and runs the whole thing through a warm
@@ -52,7 +52,7 @@ header for presets.
 
 <h3 style="color:#ff7e5f;">PITCH &amp; FORMANT</h3>
 
-![Pitch & Formant knobs](assets/manual_pitch_formant.png)
+![Pitch & Formant knobs](../assets/manual_pitch_formant.png)
 
 **PITCH** &nbsp;·&nbsp; `−12 … +12 semitones`
 Transposes the voice. Because formants are preserved, shifting an octave changes
@@ -74,7 +74,7 @@ changing the note. The most musical control on the panel:
 
 <h3 style="color:#ff7e5f;">LINK</h3>
 
-![Link toggle](assets/manual_link.png)
+![Link toggle](../assets/manual_link.png)
 
 **LINK** ties FORMANT to PITCH (and back — the link is **bidirectional**). Turn it
 on for "sped-up tape" effects, where pitch and timbre must move together
@@ -85,7 +85,7 @@ Peachy is that pitch and formant stay independent.
 
 <h3 style="color:#ff7e5f;">MODE</h3>
 
-![Mode buttons](assets/manual_mode.png)
+![Mode buttons](../assets/manual_mode.png)
 
 <table>
 <tr>
@@ -106,7 +106,7 @@ Peachy is that pitch and formant stay independent.
 
 <h3 style="color:#ff7e5f;">DRIVE</h3>
 
-![Drive knob](assets/manual_drive.png)
+![Drive knob](../assets/manual_drive.png)
 
 **DRIVE** &nbsp;·&nbsp; `0 … 100 %`
 Tube-style saturation, modelled after driven triode input stages: asymmetric,
@@ -119,7 +119,7 @@ At 100 % it is filthy, on purpose.
 
 <h3 style="color:#ff7e5f;">MIX</h3>
 
-![Mix knob](assets/manual_mix.png)
+![Mix knob](../assets/manual_mix.png)
 
 **MIX** &nbsp;·&nbsp; `0 … 100 %`
 Wet/dry balance, **latency-compensated** (no comb filtering).
@@ -131,7 +131,7 @@ Wet/dry balance, **latency-compensated** (no comb filtering).
 
 <h3 style="color:#ff7e5f;">The LCD &amp; Presets</h3>
 
-![Preset LCD](assets/manual_lcd.png)
+![Preset LCD](../assets/manual_lcd.png)
 
 The header LCD shows the current **preset** (top line) and **mode** (bottom line).
 Click the text to open the preset list; use **`<`** / **`>`** to step through
